@@ -1,0 +1,60 @@
+{
+  "Misici": [
+    {
+      "Id": 1,
+      "SlikaMisica": "res/drawable/exercises_image",
+      "Naziv": "Prednje rame",
+      "MišićnaParticijaId": [1],
+      "Opis": "Glumiš da letiš sa bućicama."
+    },
+    {
+      "Id": 2,
+      "SlikaMisica": "res/drawable/exercises_image",
+      "Naziv": "Prednje rame",
+      "MišićnaParticijaId": [1],
+      "Opis": "Glumiš da letiš sa bućicama."
+    },
+    {
+      "Id": 3,
+      "SlikaMisica": "res/drawable/exercises_image",
+      "Naziv": "Prednje rame",
+      "MišićnaParticijaId": [1],
+      "Opis": "Glumiš da letiš sa bućicama."
+    },
+    {
+      "Id": 4,
+      "SlikaMisica": "res/drawable/exercises_image",
+      "Naziv": "Prednje rame",
+      "MišićnaParticijaId": [1],
+      "Opis": "Glumiš da letiš sa bućicama."
+    },
+    {
+      "Id": 5,
+      "SlikaMisica": "res/drawable/exercises_image",
+      "Naziv": "Prednje rame",
+      "MišićnaParticijaId": [1],
+      "Opis": "Glumiš da letiš sa bućicama."
+    },
+    {
+      "Id": 6,
+      "SlikaMisica": "res/drawable/exercises_image",
+      "Naziv": "Prednje rame",
+      "MišićnaParticijaId": [1],
+      "Opis": "Glumiš da letiš sa bućicama."
+    },
+    {
+      "Id": 7,
+      "SlikaMisica": "res/drawable/exercises_image",
+      "Naziv": "Prednje rame",
+      "MišićnaParticijaId": [1],
+      "Opis": "Glumiš da letiš sa bućicama."
+    },
+    {
+      "Id": 8,
+      "SlikaMisica": "res/drawable/exercises_image",
+      "Naziv": "Prednje rame",
+      "MišićnaParticijaId": [1],
+      "Opis": "Glumiš da letiš sa bućicama."
+    }
+  ]
+}
