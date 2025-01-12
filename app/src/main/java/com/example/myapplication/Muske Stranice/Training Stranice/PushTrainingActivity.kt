@@ -57,7 +57,16 @@ class PushTrainingActivity : AppCompatActivity() {
             !it.Radjeno && it.Pol != "Ž" &&
                     (it.MišićnaParticijaId == 5 || it.MišićnaParticijaId == 2) &&
                     it.Id !in deletedIds
-        }?.sortedBy { it.PrioritetId }?.toMutableList() ?: emptyList()
+        }?.sortedWith(
+            compareBy<Vezba> {
+                when (it.MišićnaParticijaId) {
+                    5 -> 0 // Prioritet 5 na vrhu
+                    2 -> 1 // Prioritet 2 odmah iza
+                    else -> 2 // Ostali posle
+                }
+            }.thenBy { it.PrioritetId } // Sortiraj po PrioritetId nakon sortiranja po MišićnaParticijaId
+        )?.toMutableList() ?: emptyList()
+
         mutableVezbe.addAll(vezbe)
 
         setContent {
