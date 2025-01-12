@@ -1,60 +1,53 @@
 {
-  "Misici": [
+  "Misic": [
     {
       "Id": 1,
-      "SlikaMisica": "res/drawable/exercises_image",
-      "Naziv": "Prednje rame",
+      "SlikaMisica": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE1P5DBhNn4bXhT1R29aZ3K5GzhRna7Ip31Q&s",
+      "Naziv": "Rame",
       "MišićnaParticijaId": [1],
-      "Opis": "Glumiš da letiš sa bućicama."
+      "Opis": "Opis za biceps."
     },
     {
       "Id": 2,
-      "SlikaMisica": "res/drawable/exercises_image",
-      "Naziv": "Prednje rame",
-      "MišićnaParticijaId": [1],
-      "Opis": "Glumiš da letiš sa bućicama."
+      "SlikaMisica": "https://example.com/slika2.png",
+      "Naziv": "Biceps",
+      "MišićnaParticijaId": [2],
+      "Opis": "Opis za triceps."
     },
     {
       "Id": 3,
-      "SlikaMisica": "res/drawable/exercises_image",
-      "Naziv": "Prednje rame",
-      "MišićnaParticijaId": [1],
-      "Opis": "Glumiš da letiš sa bućicama."
+      "SlikaMisica": "https://example.com/slika2.png",
+      "Naziv": "Triceps",
+      "MišićnaParticijaId": [3],
+      "Opis": "Opis za triceps."
     },
     {
       "Id": 4,
-      "SlikaMisica": "res/drawable/exercises_image",
-      "Naziv": "Prednje rame",
-      "MišićnaParticijaId": [1],
-      "Opis": "Glumiš da letiš sa bućicama."
+      "SlikaMisica": "https://example.com/slika2.png",
+      "Naziv": "Gornje grudi",
+      "MišićnaParticijaId": [3],
+      "Opis": "Opis za triceps."
     },
     {
       "Id": 5,
-      "SlikaMisica": "res/drawable/exercises_image",
-      "Naziv": "Prednje rame",
-      "MišićnaParticijaId": [1],
-      "Opis": "Glumiš da letiš sa bućicama."
+      "SlikaMisica": "https://example.com/slika2.png",
+      "Naziv": "Donje grudi",
+      "MišićnaParticijaId": [3],
+      "Opis": "Opis za triceps."
     },
     {
       "Id": 6,
-      "SlikaMisica": "res/drawable/exercises_image",
-      "Naziv": "Prednje rame",
-      "MišićnaParticijaId": [1],
-      "Opis": "Glumiš da letiš sa bućicama."
+      "SlikaMisica": "https://example.com/slika2.png",
+      "Naziv": "Abs",
+      "MišićnaParticijaId": [3],
+      "Opis": "Opis za triceps."
     },
     {
       "Id": 7,
-      "SlikaMisica": "res/drawable/exercises_image",
-      "Naziv": "Prednje rame",
-      "MišićnaParticijaId": [1],
-      "Opis": "Glumiš da letiš sa bućicama."
-    },
-    {
-      "Id": 8,
-      "SlikaMisica": "res/drawable/exercises_image",
-      "Naziv": "Prednje rame",
-      "MišićnaParticijaId": [1],
-      "Opis": "Glumiš da letiš sa bućicama."
+      "SlikaMisica": "https://example.com/slika2.png",
+      "Naziv": "Core",
+      "MišićnaParticijaId": [3],
+      "Opis": "Opis za triceps."
     }
   ]
 }

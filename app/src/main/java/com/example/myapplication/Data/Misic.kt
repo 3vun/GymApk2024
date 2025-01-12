@@ -9,6 +9,5 @@ data class Misic(
 )
 
 data class MisicResponse(
-    val Misic: List<Vezba>
+    val Misic: List<Misic>
 )
-

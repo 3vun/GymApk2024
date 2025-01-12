@@ -30,7 +30,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -38,6 +37,8 @@ import androidx.compose.material3.Slider
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.zIndex
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlin.math.round
 
 
@@ -57,8 +58,6 @@ class PushTrainingActivity : AppCompatActivity() {
                     (it.MišićnaParticijaId == 5 || it.MišićnaParticijaId == 2) &&
                     it.Id !in deletedIds
         }?.sortedBy { it.PrioritetId }?.toMutableList() ?: emptyList()
-
-        // Initialize mutableVezbe state with the filtered exercises
         mutableVezbe.addAll(vezbe)
 
         setContent {
@@ -83,8 +82,7 @@ class PushTrainingActivity : AppCompatActivity() {
     }
 
     private fun restoreAllDeletedExercises() {
-        // Restore all deleted exercises here
-        clearDeletedExercises() // Optionally clear out the deleted IDs
+        clearDeletedExercises()
         val refreshedVezbe = loadVezbe()?.filter {
             !it.Radjeno && it.Pol != "Ž" &&
                     (it.MišićnaParticijaId == 5 || it.MišićnaParticijaId == 2)
@@ -95,23 +93,16 @@ class PushTrainingActivity : AppCompatActivity() {
 
     private fun restoreLastDeletedExercise() {
         val lastDeletedId = sharedPreferences.getInt("last_deleted_id", -1)
-
-        Log.d("RestoreExercise", "Last Deleted ID: $lastDeletedId")
-
         if (lastDeletedId != -1) {
             val restoredExercise = loadVezbe()?.find { it.Id == lastDeletedId }
             if (restoredExercise != null) {
-                Log.d("RestoreExercise", "Restoring exercise with ID: ${restoredExercise.Id}")
 
-                // Add the restored exercise to the list
                 mutableVezbe.add(restoredExercise)
 
-                // Remove the last exercise from the list
                 if (mutableVezbe.isNotEmpty()) {
                     mutableVezbe.removeAt(mutableVezbe.size - 1)
                 }
 
-                // Optionally, reapply the filter and sort if necessary
                 val deletedIds = getDeletedExercises().toMutableSet()
                 deletedIds.remove(lastDeletedId)
                 sharedPreferences.edit().putStringSet("deleted_ids", deletedIds.map { it.toString() }.toSet()).apply()
@@ -149,7 +140,6 @@ class PushTrainingActivity : AppCompatActivity() {
         sharedPreferences.edit().putInt("last_deleted_id", id).apply()
     }
 
-
     private fun clearDeletedExercises() {
         sharedPreferences.edit().putStringSet("deleted_ids", emptySet()).apply()
     }
@@ -165,6 +155,9 @@ class PushTrainingActivity : AppCompatActivity() {
             null
         }
     }
+
+
+
 }
 
 
@@ -185,18 +178,14 @@ fun VezbaDetail(vezba: Vezba, currentIndex: Int, totalCount: Int) {
         Text(
             text = vezba.Naziv,
             color = when (vezba.PrioritetId) {
-                1 -> Color.Red // Crveni tekst ako je PrioritetId 1
+                1 -> Color(0xFF800000) // Crveni tekst ako je PrioritetId 1
                 3 -> Color.Blue // Plavi tekst ako je PrioritetId 3
-                else -> Color.Gray // Normalna boja za ostale vrednosti
+                else -> Color.White // Normalna boja za ostale vrednosti
             },
             fontSize = 25.sp,
             textAlign = TextAlign.Center
         )
-        Text(
-            text = "---------------------------------",
-            color = Color.Gray,
-            fontSize = 15.sp
-        )
+        Spacer(modifier = Modifier.height(7.dp))
         val maxTezinaVezbe = 10
         Row {
             // Prikaz zlatnih zvezdica
@@ -207,7 +196,6 @@ fun VezbaDetail(vezba: Vezba, currentIndex: Int, totalCount: Int) {
                     modifier = Modifier.size(15.dp) // Podesite veličinu zvezdica
                 )
             }
-
             // Prikaz sivih zvezdica
             repeat(maxTezinaVezbe - vezba.TezinaVezbe) {
                 Image(
@@ -217,16 +205,13 @@ fun VezbaDetail(vezba: Vezba, currentIndex: Int, totalCount: Int) {
                 )
             }
         }
-        Text(
-            text = "---------------------------------",
-            color = Color.Gray,
-            fontSize = 15.sp
-        )
+        Spacer(modifier = Modifier.height(7.dp))
         Text(
             text = vezba.Mišić.joinToString(" | "),
             color = Color.Gray,
             fontSize = 15.sp
         )
+        Spacer(modifier = Modifier.height(10.dp))
 
         val imagePainter = when {
             !vezba.SlikaVezbe.isNullOrEmpty() && vezba.SlikaVezbe.startsWith("http") -> {
@@ -252,7 +237,6 @@ fun VezbaDetail(vezba: Vezba, currentIndex: Int, totalCount: Int) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(150.dp)
-                .padding(bottom = 3.dp)
                 .clickable {
                     isVideoPlaying = if (isVideoPlaying) {
                         false // Zatvara video
@@ -266,14 +250,20 @@ fun VezbaDetail(vezba: Vezba, currentIndex: Int, totalCount: Int) {
         if (isVideoPlaying && !vezba.KlipVezbe.isNullOrEmpty()) {
             VideoPlayer(clipPath = vezba.KlipVezbe)
         }
-        Text(
-            text = vezba.InstrukcijeVezbe,
-            color = Color.Gray,
-            fontSize = 17.sp,
-            modifier = Modifier.padding(bottom = 3.dp)
-        )
+
+        // Prikaz opisa vežbe samo kada je video pokrenut
+        if (isVideoPlaying) {
+            Text(
+                text = vezba.InstrukcijeVezbe,
+                color = Color.Black,
+                fontSize = 17.sp,
+                //modifier = Modifier.padding(bottom = 3.dp)
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
+
 
 @Composable
 fun VideoPlayer(clipPath: String) {
@@ -336,12 +326,14 @@ fun VezbaList(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
+                .background(color = Color.Black)
                 .zIndex(0f), // Ensure cards are in the background
+
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(vezbe) { vezba ->
-                val cardColor = Color.DarkGray
+                val cardColor = Color.LightGray
 
                 Card(
                     modifier = Modifier

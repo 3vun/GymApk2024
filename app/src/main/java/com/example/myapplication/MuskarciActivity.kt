@@ -66,7 +66,7 @@ class MuskarciActivity : AppCompatActivity() {
         val imageData = listOf(
             Triple(R.drawable.training_image, TrainingActivity::class.java, "Trening"),
             Triple(R.drawable.exercises_image, ExercisesActivity::class.java, "Vežbe"),
-            //Triple(R.drawable.muscles_image, MusclesActivity::class.java, "Mišići"),
+            Triple(R.drawable.muscles_image, MusclesActivity::class.java, "Mišići"),
             Triple(R.drawable.nutrition_image, NutritionActivity::class.java, "Ishrana"),
             Triple(R.drawable.progress_image, ProgressActivity::class.java, "Napredak")
         )
